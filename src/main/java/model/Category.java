@@ -1,6 +1,6 @@
-package entity;
+package model;
 
-import entity.base.BaseEntity;
+import model.base.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,14 +16,10 @@ import javax.persistence.ManyToOne;
 @Getter
 @Setter
 @Entity
-public class Service extends BaseEntity<Integer> {
-    @Column(unique = true , columnDefinition = "varchar(100)")
+public class Category extends BaseEntity<Integer> {
+    @Column(columnDefinition = "varchar(50)")
     private String name;
-    @Column(columnDefinition = "varchar(1000)")
-    private String description;
-    @Column(columnDefinition = "int")
-    private Integer basePrice;
     @ManyToOne
-    @JoinColumn(name = "category_id" , columnDefinition = "int")
+    @JoinColumn(nullable = true , name = "category_id")
     private Category category;
 }

@@ -1,4 +1,4 @@
-package entity.enumration;
+package model.enumration;
 
 public enum OrderStatus {
     waitingForExpertSuggestions,

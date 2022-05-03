@@ -1,6 +1,6 @@
-package entity;
+package model;
 
-import entity.base.BaseEntity;
+import model.base.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

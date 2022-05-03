@@ -1,6 +1,6 @@
-package entity;
+package model;
 
-import entity.enumration.AccountStatus;
+import model.enumration.AccountStatus;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

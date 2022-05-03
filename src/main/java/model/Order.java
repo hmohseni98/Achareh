@@ -1,7 +1,7 @@
-package entity;
+package model;
 
-import entity.base.BaseEntity;
-import entity.enumration.OrderStatus;
+import model.base.BaseEntity;
+import model.enumration.OrderStatus;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

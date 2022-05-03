@@ -1,4 +1,4 @@
-package entity.base;
+package model.base;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
