@@ -1,7 +1,12 @@
 package repository;
 
 import model.Expert;
-import repository.base.BaseRepository;
+import model.enumration.AccountStatus;
 
-public interface ExpertRepository extends BaseRepository<Expert,Integer> {
+import java.util.List;
+
+public interface ExpertRepository extends BasePersonRepository<Expert, Integer> {
+    List<Expert> findAllByStatus(AccountStatus status);
+
+    List<Expert> findAllByCategory(String categoryName);
 }

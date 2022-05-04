@@ -1,7 +1,16 @@
 package repository;
 
+import model.Expert;
 import model.Offer;
 import repository.base.BaseRepository;
 
-public interface OfferRepository extends BaseRepository<Offer,Integer> {
+import java.sql.Date;
+import java.util.List;
+
+public interface OfferRepository extends BaseRepository<Offer, Integer> {
+    List<Offer> findAllOfferByExpert(Expert expert);
+
+    List<Offer> findAllOfferByDate(Date date);
+
+
 }
