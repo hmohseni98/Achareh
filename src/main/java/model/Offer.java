@@ -18,7 +18,7 @@ import java.sql.Time;
 @Getter
 @Setter
 @Cacheable
-@Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @Entity
 public class Offer extends BaseEntity<Integer> {
     @ManyToOne

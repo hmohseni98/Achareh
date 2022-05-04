@@ -14,7 +14,7 @@ import javax.persistence.Entity;
 @Getter
 @Setter
 @Cacheable
-@Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @Entity
 public class Admin extends Person {
 }

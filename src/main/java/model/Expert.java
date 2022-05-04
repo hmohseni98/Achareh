@@ -9,6 +9,8 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
+import java.sql.Date;
+import java.sql.Time;
 import java.util.Set;
 
 @AllArgsConstructor
@@ -16,7 +18,7 @@ import java.util.Set;
 @Getter
 @Setter
 @Cacheable
-@Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @Entity
 public class Expert extends Person {
     @Enumerated(EnumType.STRING)
@@ -32,4 +34,11 @@ public class Expert extends Person {
     @Column(name = "balance" , columnDefinition = "int")
     private Integer balance;
 
+    public Expert(String firstName, String lastName, String email, String password, Date registerData, Time registerTime, AccountStatus status, String image, Set<Service> services, Integer balance) {
+        super(firstName, lastName, email, password, registerData, registerTime);
+        this.status = status;
+        this.image = image;
+        this.services = services;
+        this.balance = balance;
+    }
 }

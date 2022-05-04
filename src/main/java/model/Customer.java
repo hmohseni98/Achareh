@@ -16,7 +16,7 @@ import javax.persistence.Entity;
 @Getter
 @Setter
 @Cacheable
-@Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @Entity
 public class Customer extends Person{
     @Column(name = "balance" , columnDefinition = "int")

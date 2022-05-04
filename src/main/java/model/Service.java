@@ -15,16 +15,16 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Cacheable
-@Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @Entity
 public class Service extends BaseEntity<Integer> {
-    @Column(unique = true , columnDefinition = "varchar(100)")
+    @Column(unique = true, columnDefinition = "varchar(100)")
     private String name;
     @Column(columnDefinition = "varchar(1000)")
     private String description;
-    @Column(columnDefinition = "int")
+    @Column(name = "base_price", columnDefinition = "int")
     private Integer basePrice;
     @ManyToOne
-    @JoinColumn(name = "category_id" , columnDefinition = "int")
+    @JoinColumn(name = "category_id", columnDefinition = "int")
     private Category category;
 }

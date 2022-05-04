@@ -18,7 +18,7 @@ import java.sql.Time;
 @Getter
 @Setter
 @Cacheable
-@Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @Entity
 @Table(name = "orders")
 public class Order extends BaseEntity<Integer> {

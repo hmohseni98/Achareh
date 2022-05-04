@@ -15,7 +15,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Cacheable
-@Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @Entity
 public class Comment extends BaseEntity<Integer> {
     @ManyToOne

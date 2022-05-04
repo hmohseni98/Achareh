@@ -1,10 +1,7 @@
 package model;
 
+import lombok.*;
 import model.base.BaseEntity;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -23,4 +20,8 @@ public class Category extends BaseEntity<Integer> {
     @ManyToOne
     @JoinColumn(nullable = true , name = "category_id")
     private Category category;
+
+    public Category(String name) {
+        this.name = name;
+    }
 }
