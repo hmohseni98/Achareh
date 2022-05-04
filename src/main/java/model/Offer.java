@@ -5,11 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Time;
 
@@ -18,6 +17,8 @@ import java.sql.Time;
 @NoArgsConstructor
 @Getter
 @Setter
+@Cacheable
+@Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
 @Entity
 public class Offer extends BaseEntity<Integer> {
     @ManyToOne
@@ -34,7 +35,7 @@ public class Offer extends BaseEntity<Integer> {
     private Integer suggestionPrice;
     @Column(name = "duration_of_work")
     private Float durationOfWork;
-    @Column(name = "start_work_time")
+    @Column(name = "start_work_time")   // check beshe ke time va date mikhad ya na.
     private Time startWorkTime;
 
 }

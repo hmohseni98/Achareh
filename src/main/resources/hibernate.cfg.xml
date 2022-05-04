@@ -4,11 +4,12 @@
         "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>
-        <property name="connection.url">jdbc:postgresql://localhost:5432/postgres</property>
+        <property name="connection.url">jdbc:postgresql://localhost:5432/achareh</property>
         <property name="connection.username">postgres</property>
         <property name="connection.password">123456</property>
-        <property name="connection.driver_class">org.postgresql.Driver</property>
 
+        <property name="cache.use_second_level_cache">true</property>
+        <property name="cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</property>
 
         <property name="hibernate.hbm2ddl.auto">create-drop</property>
         <property name="current_session_context_class">thread</property>

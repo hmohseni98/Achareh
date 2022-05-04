@@ -6,5 +6,6 @@ public enum OrderStatus {
     dispatchOfAnExpert,
     doing,
     done,
-    Paid
+    Paid,
+    cancel
 }

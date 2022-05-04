@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -13,6 +15,8 @@ import java.util.Set;
 @NoArgsConstructor
 @Getter
 @Setter
+@Cacheable
+@Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
 @Entity
 public class Expert extends Person {
     @Enumerated(EnumType.STRING)
