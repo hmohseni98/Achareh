@@ -9,6 +9,11 @@ import java.util.List;
 
 public class OrderRepositoryImpl extends BaseRepositoryImpl<Order, Integer> implements OrderRepository {
     @Override
+    public Class<Order> getEntityClass() {
+        return Order.class;
+    }
+
+    @Override
     public List<Order> findAllyByCustomer(Customer customer) {
         var session = getSessionFactory().getCurrentSession();
         String sql = "select * from orders " +
