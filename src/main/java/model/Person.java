@@ -25,4 +25,10 @@ public abstract class Person extends BaseEntity<Integer> {
     private Date registerData;
     @Column(name = "register_time")
     private Time registerTime;
+
+    public Person(String firstName, String lastName, String email) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+    }
 }

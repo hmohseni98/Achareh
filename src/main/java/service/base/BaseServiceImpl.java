@@ -62,12 +62,12 @@ public class BaseServiceImpl<R extends BaseRepository<E, ID>, E extends BaseEnti
     }
 
     @Override
-    public E findById(Class<E> eClass, ID id) {
-        return repository.findById(eClass, id);
+    public E findById(ID id) {
+        return repository.findById(entityClass, id);
     }
 
     @Override
-    public List<E> findAll(Class<E> eClass) {
-        return repository.findAll(eClass);
+    public List<E> findAll() {
+        return repository.findAll(entityClass);
     }
 }

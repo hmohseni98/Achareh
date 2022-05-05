@@ -9,6 +9,8 @@ import java.util.List;
 
 public abstract class BaseRepositoryImpl<E extends BaseEntity<ID>, ID extends Serializable> implements BaseRepository<E, ID> {
 
+    public abstract Class<E> getEntityClass();
+
     @Override
     public void save(E e) {
         var session = getSessionFactory().getCurrentSession();

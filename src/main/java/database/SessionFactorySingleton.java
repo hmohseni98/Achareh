@@ -4,8 +4,8 @@ package database;
 import model.*;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
-import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import service.dto.CommentDTO;
 
 public class SessionFactorySingleton {
 
@@ -16,7 +16,7 @@ public class SessionFactorySingleton {
         static SessionFactory INSTANCE;
 
         static {
-            StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
+            var registry = new StandardServiceRegistryBuilder()
                     .configure()
                     .build();
 

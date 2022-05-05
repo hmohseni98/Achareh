@@ -5,13 +5,14 @@ import model.Customer;
 import model.Expert;
 import model.Service;
 import service.base.BaseService;
+import service.dto.CommentDTO;
 
 import java.util.List;
 
 public interface CommentService extends BaseService<Comment,Integer> {
-    List<Comment> findAllByCustomer(Customer customer);
+    List<CommentDTO> findAllByCustomer(Customer customer);
 
-    List<Comment> findAllByExpert(Expert expert);
+    List<CommentDTO> findAllByExpert(Expert expert);
 
-    List<Comment> findAllByService(Service service);
+    List<CommentDTO> findAllByService(Service service);
 }

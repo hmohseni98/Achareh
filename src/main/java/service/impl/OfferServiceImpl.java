@@ -8,6 +8,7 @@ import model.enumration.AccountStatus;
 import repository.OfferRepository;
 import service.OfferService;
 import service.base.BaseServiceImpl;
+import service.dto.OfferDTO;
 
 import java.sql.Date;
 import java.util.List;
@@ -36,8 +37,8 @@ public class OfferServiceImpl extends BaseServiceImpl<OfferRepository, Offer, In
     }
 
     @Override
-    public List<Offer> findAllOfferByExpert(Expert expert) {
-        List<Offer> offerList;
+    public List<OfferDTO> findAllOfferByExpert(Expert expert) {
+        List<OfferDTO> offerList;
         try (var session = getSessionFactory().getCurrentSession()) {
             var transaction = session.beginTransaction();
             try {
@@ -53,8 +54,8 @@ public class OfferServiceImpl extends BaseServiceImpl<OfferRepository, Offer, In
     }
 
     @Override
-    public List<Offer> findAllOfferByDate(Date date) {
-        List<Offer> offerList;
+    public List<OfferDTO> findAllOfferByDate(Date date) {
+        List<OfferDTO> offerList;
         try (var session = getSessionFactory().getCurrentSession()) {
             var transaction = session.beginTransaction();
             try {

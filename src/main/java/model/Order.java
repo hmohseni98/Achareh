@@ -10,8 +10,8 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
-import java.sql.Date;
-import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -33,16 +33,16 @@ public class Order extends BaseEntity<Integer> {
     private Expert acceptExpert;
     @Column(columnDefinition = "varchar(250)")
     private String description;
-    @Column(name = "proposed_price", columnDefinition = "int")
-    private Integer ProposedPrice;
+    @Column(name = "suggestion_price", columnDefinition = "int")
+    private Integer suggestionPrice;
     @Column(name = "submit_date")
-    private Date submitDate;
+    private LocalDate submitDate;
     @Column(name = "submit_time")
-    private Time submitTime;
+    private LocalTime submitTime;
     @Column(name = "work_date")
-    private Date workDate;
+    private LocalDate workDate;
     @Column(name = "work_time")
-    private Time workTime;
+    private LocalTime workTime;
     @Column(name = "address", columnDefinition = "varchar(250)")
     private String address;
     @Enumerated(EnumType.STRING)

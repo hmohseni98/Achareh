@@ -9,6 +9,8 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -16,6 +18,8 @@ import javax.persistence.*;
 @Setter
 @Cacheable
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@Table( name = "comment",
+        uniqueConstraints = { @UniqueConstraint( columnNames = { "customer_id", "order_id" } ) } )
 @Entity
 public class Comment extends BaseEntity<Integer> {
     @ManyToOne
@@ -31,4 +35,9 @@ public class Comment extends BaseEntity<Integer> {
     private Integer score;
     @Column(name = "description" , columnDefinition = "varchar(255)")
     private String description;
+    @Column(name = "date")
+    private LocalDate date;
+    @Column(name = "time")
+    private LocalTime time;
+
 }

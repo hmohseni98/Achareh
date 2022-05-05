@@ -20,7 +20,7 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderRepository, Order, In
     @Override
     public void save(Order order) {
         try {
-            if (order.getProposedPrice() < order.getService().getBasePrice()) {
+            if (order.getSuggestionPrice() < order.getService().getBasePrice()) {
                 throw new ProposedPriceMustBeHigherThanTheBasePrice();
             }
             super.save(order);

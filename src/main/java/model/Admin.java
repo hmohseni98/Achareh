@@ -8,6 +8,8 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.Cacheable;
 import javax.persistence.Entity;
+import java.sql.Date;
+import java.sql.Time;
 
 
 @AllArgsConstructor
@@ -17,4 +19,8 @@ import javax.persistence.Entity;
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @Entity
 public class Admin extends Person {
+
+    public Admin(String firstName, String lastName, String email) {
+        super(firstName, lastName, email);
+    }
 }

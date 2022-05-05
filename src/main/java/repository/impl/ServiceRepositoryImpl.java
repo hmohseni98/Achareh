@@ -8,7 +8,12 @@ import repository.base.BaseRepositoryImpl;
 
 import java.util.List;
 
-public class ServiceRepositoryImpl extends BaseRepositoryImpl<Service,Integer> implements ServiceRepository {
+public class ServiceRepositoryImpl extends BaseRepositoryImpl<Service, Integer> implements ServiceRepository {
+    @Override
+    public Class<Service> getEntityClass() {
+        return Service.class;
+    }
+
     @Override
     public List<Service> findAllByCategory(Category category) {
         var session = getSessionFactory().getCurrentSession();

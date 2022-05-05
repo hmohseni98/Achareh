@@ -19,7 +19,7 @@ public interface BaseService<E extends BaseEntity<ID>, ID extends Serializable> 
 
     void update(E e);
 
-    E findById(Class<E> eClass, ID id);
+    E findById(ID id);
 
-    List<E> findAll(Class<E> eClass);
+    List<E> findAll();
 }

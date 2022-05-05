@@ -4,6 +4,9 @@ import model.Admin;
 import repository.AdminRepository;
 import service.AdminService;
 import service.base.BaseServiceImpl;
+import service.dto.CommentDTO;
+
+import java.util.List;
 
 public class AdminServiceImpl extends BaseServiceImpl<AdminRepository, Admin,Integer> implements AdminService {
     private final AdminRepository adminRepository;
@@ -46,5 +49,22 @@ public class AdminServiceImpl extends BaseServiceImpl<AdminRepository, Admin,Int
             }
         }
         return admin;
+    }
+
+    @Override
+    public List<Admin> girdSearch(Integer id,String firstName,String lastName,String email) {
+        List<Admin> adminList;
+        try (var session = getSessionFactory().getCurrentSession()) {
+            var transaction = session.beginTransaction();
+            try {
+                adminList = adminRepository.gridSearch(id, firstName, lastName, email);
+                transaction.commit();
+            } catch (Exception ex){
+                transaction.rollback();
+                System.out.println(ex.getMessage());
+                return null;
+            }
+        }
+        return adminList;
     }
 }

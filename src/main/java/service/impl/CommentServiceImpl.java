@@ -8,6 +8,7 @@ import model.enumration.OrderStatus;
 import repository.CommentRepository;
 import service.CommentService;
 import service.base.BaseServiceImpl;
+import service.dto.CommentDTO;
 
 import java.util.List;
 
@@ -38,8 +39,8 @@ public class CommentServiceImpl extends BaseServiceImpl<CommentRepository, Comme
     }
 
     @Override
-    public List<Comment> findAllByCustomer(Customer customer) {
-        List<Comment> commentList;
+    public List<CommentDTO> findAllByCustomer(Customer customer) {
+        List<CommentDTO> commentList;
         try (var session = getSessionFactory().getCurrentSession()) {
             var transaction = session.beginTransaction();
             try {
@@ -55,8 +56,8 @@ public class CommentServiceImpl extends BaseServiceImpl<CommentRepository, Comme
     }
 
     @Override
-    public List<Comment> findAllByExpert(Expert expert) {
-        List<Comment> commentList;
+    public List<CommentDTO> findAllByExpert(Expert expert) {
+        List<CommentDTO> commentList;
         try (var session = getSessionFactory().getCurrentSession()) {
             var transaction = session.beginTransaction();
             try {
@@ -72,8 +73,8 @@ public class CommentServiceImpl extends BaseServiceImpl<CommentRepository, Comme
     }
 
     @Override
-    public List<Comment> findAllByService(Service service) {
-        List<Comment> commentList;
+    public List<CommentDTO> findAllByService(Service service) {
+        List<CommentDTO> commentList;
         try (var session = getSessionFactory().getCurrentSession()) {
             var transaction = session.beginTransaction();
             try {

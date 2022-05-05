@@ -9,8 +9,9 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
-import java.sql.Date;
 import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 
 @AllArgsConstructor
@@ -19,6 +20,8 @@ import java.sql.Time;
 @Setter
 @Cacheable
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@Table( name = "offer",
+        uniqueConstraints = { @UniqueConstraint( columnNames = { "expert_id", "order_id" } ) } )
 @Entity
 public class Offer extends BaseEntity<Integer> {
     @ManyToOne
@@ -28,14 +31,14 @@ public class Offer extends BaseEntity<Integer> {
     @JoinColumn(name = "order_id")
     private Order order;
     @Column(name = "submit_date")
-    private Date submitDate;
+    private LocalDate submitDate;
     @Column(name = "submit_time")
-    private Time submitTime;
+    private LocalTime submitTime;
     @Column(name = "suggestion_price")
     private Integer suggestionPrice;
     @Column(name = "duration_of_work")
-    private Float durationOfWork;
+    private Integer durationOfWork;        // check
     @Column(name = "start_work_time")   // check beshe ke time va date mikhad ya na.
-    private Time startWorkTime;
+    private LocalTime startWorkTime;
 
 }

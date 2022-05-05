@@ -1,10 +1,7 @@
 package model;
 
+import lombok.*;
 import model.enumration.AccountStatus;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -23,7 +20,7 @@ import java.util.Set;
 public class Expert extends Person {
     @Enumerated(EnumType.STRING)
     private AccountStatus status;
-    private String image;
+    private byte[] image;
     @ManyToMany
     @JoinTable(
             name = "expert_service",
@@ -34,7 +31,7 @@ public class Expert extends Person {
     @Column(name = "balance" , columnDefinition = "int")
     private Integer balance;
 
-    public Expert(String firstName, String lastName, String email, String password, Date registerData, Time registerTime, AccountStatus status, String image, Set<Service> services, Integer balance) {
+    public Expert(String firstName, String lastName, String email, String password, Date registerData, Time registerTime, AccountStatus status, byte[] image, Set<Service> services, Integer balance) {
         super(firstName, lastName, email, password, registerData, registerTime);
         this.status = status;
         this.image = image;

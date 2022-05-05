@@ -5,6 +5,7 @@ import model.enumration.AccountStatus;
 import repository.ExpertRepository;
 import service.ExpertService;
 import service.base.BaseServiceImpl;
+import service.dto.ExpertDTO;
 import java.util.List;
 
 public class ExpertServiceImpl extends BaseServiceImpl<ExpertRepository, Expert, Integer> implements ExpertService {
@@ -50,8 +51,8 @@ public class ExpertServiceImpl extends BaseServiceImpl<ExpertRepository, Expert,
     }
 
     @Override
-    public List<Expert> findAllByStatus(AccountStatus status) {
-        List<Expert> expertList;
+    public List<ExpertDTO> findAllByStatus(AccountStatus status) {
+        List<ExpertDTO> expertList;
         try (var session = getSessionFactory().getCurrentSession()) {
             var transaction = session.beginTransaction();
             try {
@@ -67,14 +68,31 @@ public class ExpertServiceImpl extends BaseServiceImpl<ExpertRepository, Expert,
     }
 
     @Override
-    public List<Expert> findAllByCategory(String categoryName) {
-        List<Expert> expertList;
+    public List<ExpertDTO> findAllByCategory(String categoryName) {
+        List<ExpertDTO> expertList;
         try (var session = getSessionFactory().getCurrentSession()) {
             var transaction = session.beginTransaction();
             try {
                 expertList = expertRepository.findAllByCategory(categoryName);
                 transaction.commit();
             } catch (Exception ex) {
+                transaction.rollback();
+                System.out.println(ex.getMessage());
+                return null;
+            }
+        }
+        return expertList;
+    }
+
+    @Override
+    public List<Expert> girdSearch(Integer id, String firstName, String lastName, String email, String serviceName) {
+        List<Expert> expertList;
+        try (var session = getSessionFactory().getCurrentSession()) {
+            var transaction = session.beginTransaction();
+            try {
+                expertList = expertRepository.girdSearch(id, firstName, lastName, email,serviceName);
+                transaction.commit();
+            } catch (Exception ex){
                 transaction.rollback();
                 System.out.println(ex.getMessage());
                 return null;
