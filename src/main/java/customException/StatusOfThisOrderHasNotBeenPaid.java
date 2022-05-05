@@ -1,6 +1,6 @@
 package customException;
 
-public class StatusOfThisOrderHasNotBeenPaid extends Exception{
+public class StatusOfThisOrderHasNotBeenPaid extends RuntimeException{
     public StatusOfThisOrderHasNotBeenPaid() {
         super("Status of this order has not been paid");
     }
