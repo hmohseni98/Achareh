@@ -1,5 +1,6 @@
 package model;
 
+import lombok.experimental.SuperBuilder;
 import model.base.BaseEntity;
 import model.enumration.OrderStatus;
 import lombok.AllArgsConstructor;
@@ -8,15 +9,17 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.time.LocalDateTime;
+import java.util.Objects;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
+@SuperBuilder(toBuilder = true)
 @Cacheable
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @Entity
@@ -29,24 +32,35 @@ public class Order extends BaseEntity<Integer> {
     @JoinColumn(name = "service_id")
     private Service service;
     @ManyToOne
-    @JoinColumn(name = "accept_expert_id")
-    private Expert acceptExpert;
+    @JoinColumn(name = "accept_order_id")
+    private Expert acceptOrder;
     @Column(columnDefinition = "varchar(250)")
     private String description;
     @Column(name = "suggestion_price", columnDefinition = "int")
     private Integer suggestionPrice;
-    @Column(name = "submit_date")
-    private LocalDate submitDate;
-    @Column(name = "submit_time")
-    private LocalTime submitTime;
-    @Column(name = "work_date")
-    private LocalDate workDate;
-    @Column(name = "work_time")
-    private LocalTime workTime;
+    @CreationTimestamp
+    @Column(name = "submit_date_time")
+    private LocalDateTime submitDateTime;
+    @CreationTimestamp
+    @Column(name = "work_date_time")
+    private LocalDateTime workDateTime;
     @Column(name = "address", columnDefinition = "varchar(250)")
     private String address;
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private OrderStatus status;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Order order = (Order) o;
+        return Objects.equals(customer, order.customer) && Objects.equals(service, order.service) && Objects.equals(acceptOrder, order.acceptOrder) && Objects.equals(description, order.description) && Objects.equals(suggestionPrice, order.suggestionPrice) && Objects.equals(submitDateTime, order.submitDateTime) && Objects.equals(workDateTime, order.workDateTime) && Objects.equals(address, order.address) && status == order.status;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), customer, service, acceptOrder, description, suggestionPrice, submitDateTime, workDateTime, address, status);
+    }
 }
