@@ -1,20 +1,40 @@
 package service.impl;
 
+import customException.OldPasswordIsIncorrect;
 import model.Expert;
 import model.enumration.AccountStatus;
-import repository.ExpertRepository;
+import repository.impl.ExpertRepositoryImpl;
 import service.ExpertService;
 import service.base.BaseServiceImpl;
 import service.dto.ExpertDTO;
+
 import java.util.List;
 
-public class ExpertServiceImpl extends BaseServiceImpl<ExpertRepository, Expert, Integer> implements ExpertService {
-    private final ExpertRepository expertRepository;
+public class ExpertServiceImpl extends BaseServiceImpl<ExpertRepositoryImpl, Expert, Integer>
+        implements ExpertService {
 
-    public ExpertServiceImpl(ExpertRepository expertRepository) {
-        super(expertRepository, Expert.class);
-        this.expertRepository = expertRepository;
+    private final ExpertRepositoryImpl expertRepository;
+
+    public ExpertServiceImpl(ExpertRepositoryImpl repository) {
+        super(repository, Expert.class);
+        expertRepository = repository;
     }
+
+    @Override
+    public void changePassword(Integer id, String oldPassword, String newPassword) {
+        Expert expert;
+        expert = super.findById(id);
+        try {
+            if (!expert.getPassword().equals(oldPassword)) {
+                throw new OldPasswordIsIncorrect();
+            }
+            expert.setPassword(newPassword);
+            super.update(expert);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
 
     @Override
     public Expert login(String email, String password) {
@@ -84,20 +104,22 @@ public class ExpertServiceImpl extends BaseServiceImpl<ExpertRepository, Expert,
         return expertList;
     }
 
-    @Override
-    public List<Expert> girdSearch(Integer id, String firstName, String lastName, String email, String serviceName) {
-        List<Expert> expertList;
-        try (var session = getSessionFactory().getCurrentSession()) {
-            var transaction = session.beginTransaction();
-            try {
-                expertList = expertRepository.girdSearch(id, firstName, lastName, email,serviceName);
-                transaction.commit();
-            } catch (Exception ex){
-                transaction.rollback();
-                System.out.println(ex.getMessage());
-                return null;
-            }
-        }
-        return expertList;
-    }
+
+//    public List<Expert> girdSearch(Integer id, String firstName, String lastName, String email, String serviceName) {
+//        List<Expert> expertList;
+//        try (var session = getSessionFactory().getCurrentSession()) {
+//            var transaction = session.beginTransaction();
+//            try {
+//                expertList = expertRepository.girdSearch(id, firstName, lastName, email,serviceName);
+//                transaction.commit();
+//            } catch (Exception ex){
+//                transaction.rollback();
+//                System.out.println(ex.getMessage());
+//                return null;
+//            }
+//        }
+//        return expertList;
+//    }
+
+
 }

@@ -7,15 +7,15 @@ import service.impl.*;
 
 
 public class ApplicationContext {
-    private static final AdminRepository adminRepository;
+    private static final AdminRepositoryImpl adminRepository;
 
     private static final CategoryRepository categoryRepository;
 
     private static final CommentRepository commentRepository;
 
-    private static final CustomerRepository customerRepository;
+    private static final CustomerRepositoryImpl customerRepository;
 
-    private static final ExpertRepository expertRepository;
+    private static final ExpertRepositoryImpl expertRepository;
 
     private static final OfferRepository offerRepository;
 
@@ -72,39 +72,6 @@ public class ApplicationContext {
 
         servService = new ServServiceImpl(serviceRepository);
     }
-
-    public static AdminRepository getAdminRepository() {
-        return adminRepository;
-    }
-
-    public static CategoryRepository getCategoryRepository() {
-        return categoryRepository;
-    }
-
-    public static CommentRepository getCommentRepository() {
-        return commentRepository;
-    }
-
-    public static CustomerRepository getCustomerRepository() {
-        return customerRepository;
-    }
-
-    public static ExpertRepository getExpertRepository() {
-        return expertRepository;
-    }
-
-    public static OfferRepository getOfferRepository() {
-        return offerRepository;
-    }
-
-    public static OrderRepository getOrderRepository() {
-        return orderRepository;
-    }
-
-    public static ServiceRepository getServiceRepository() {
-        return serviceRepository;
-    }
-
     public static AdminService getAdminService() {
         return adminService;
     }

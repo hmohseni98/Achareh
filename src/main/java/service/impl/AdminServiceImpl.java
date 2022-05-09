@@ -1,19 +1,19 @@
 package service.impl;
 
+import customException.OldPasswordIsIncorrect;
 import model.Admin;
-import repository.AdminRepository;
+import repository.impl.AdminRepositoryImpl;
 import service.AdminService;
 import service.base.BaseServiceImpl;
-import service.dto.CommentDTO;
 
-import java.util.List;
+public class AdminServiceImpl extends BaseServiceImpl<AdminRepositoryImpl, Admin, Integer>
+        implements AdminService {
 
-public class AdminServiceImpl extends BaseServiceImpl<AdminRepository, Admin,Integer> implements AdminService {
-    private final AdminRepository adminRepository;
+    private final AdminRepositoryImpl adminRepository;
 
-    public AdminServiceImpl(AdminRepository adminRepository) {
-        super(adminRepository, Admin.class);
-        this.adminRepository = adminRepository;
+    public AdminServiceImpl(AdminRepositoryImpl repository) {
+        super(repository, Admin.class);
+        adminRepository = repository;
     }
 
 
@@ -52,19 +52,17 @@ public class AdminServiceImpl extends BaseServiceImpl<AdminRepository, Admin,Int
     }
 
     @Override
-    public List<Admin> girdSearch(Integer id,String firstName,String lastName,String email) {
-        List<Admin> adminList;
-        try (var session = getSessionFactory().getCurrentSession()) {
-            var transaction = session.beginTransaction();
-            try {
-                adminList = adminRepository.gridSearch(id, firstName, lastName, email);
-                transaction.commit();
-            } catch (Exception ex){
-                transaction.rollback();
-                System.out.println(ex.getMessage());
-                return null;
+    public void changePassword(Integer id, String oldPassword, String newPassword) {
+        Admin admin;
+        admin = super.findById(id);
+        try {
+            if (!admin.getPassword().equals(oldPassword)) {
+                throw new OldPasswordIsIncorrect();
             }
+            admin.setPassword(newPassword);
+            super.update(admin);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
         }
-        return adminList;
     }
 }

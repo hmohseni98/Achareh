@@ -8,10 +8,10 @@ import java.io.Serializable;
 import java.util.List;
 
 public class BaseServiceImpl<R extends BaseRepository<E, ID>, E extends BaseEntity<ID>, ID extends Serializable>
-        implements service.base.BaseService<E, ID> {
+        implements BaseService<E, ID> {
 
     private final R repository;
-    private Class<E> entityClass;
+    public final Class<E> entityClass;
 
 
     public BaseServiceImpl(R repository, Class<E> entityClass) {

@@ -5,6 +5,8 @@ import model.Expert;
 import model.enumration.AccountStatus;
 import org.hibernate.transform.Transformers;
 import repository.ExpertRepository;
+import repository.PersonRepository;
+import repository.base.BaseRepositoryImpl;
 import service.dto.ExpertDTO;
 
 import javax.persistence.criteria.Predicate;
@@ -12,7 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class ExpertRepositoryImpl extends BasePersonRepositoryImpl<Expert,Integer> implements ExpertRepository {
+public class ExpertRepositoryImpl extends BaseRepositoryImpl<Expert,Integer>
+        implements ExpertRepository, PersonRepository<Expert> {
 
     @Override
     public Class<Expert> getEntityClass() {
@@ -55,38 +58,5 @@ public class ExpertRepositoryImpl extends BasePersonRepositoryImpl<Expert,Intege
         return query.list();
     }
 
-    @Override
-    public List<Expert> girdSearch(Integer id, String firstName, String lastName, String email, String serviceName) {
-        var session = getSessionFactory().getCurrentSession();
 
-        var cb = session.getCriteriaBuilder();
-
-        var expertQuery = cb.createQuery(Expert.class);
-        var root = expertQuery.from(Expert.class);
-
-        expertQuery
-                .select(root);
-        List<Predicate> predicates = new ArrayList<>();
-
-        if (id != null) {
-            predicates.add(cb.equal(root.get("id"), id));
-        }
-
-        if (firstName != null && !firstName.isEmpty()) {
-            predicates.add(cb.like(root.get("firstName"), "%" + firstName + "%"));
-        }
-
-        if (lastName != null && !lastName.isEmpty()) {
-            predicates.add(cb.like(root.get("lastName"), "%" + lastName + "%"));
-        }
-
-        if (email != null && !email.isEmpty()) {
-            predicates.add(cb.like(root.get("email"), "%" + email + "%"));
-        }
-
-        expertQuery
-                .where(predicates.toArray(new Predicate[0]));
-
-        return session.createQuery(expertQuery).list();
-    }
 }

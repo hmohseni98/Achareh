@@ -1,11 +1,8 @@
 package repository;
 
 import model.Admin;
+import repository.base.BaseRepository;
 
-import java.util.List;
-
-public interface AdminRepository extends BasePersonRepository<Admin, Integer> {
-
-    List<Admin> gridSearch(Integer id, String firstName, String lastName, String email);
+public interface AdminRepository extends BaseRepository<Admin, Integer>  {
 
 }
