@@ -33,7 +33,7 @@ public class Order extends BaseEntity<Integer> {
     private Service service;
     @ManyToOne
     @JoinColumn(name = "accept_order_id")
-    private Expert acceptOrder;
+    private Order acceptOrder;
     @Column(columnDefinition = "varchar(250)")
     private String description;
     @Column(name = "suggestion_price", columnDefinition = "int")
